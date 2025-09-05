@@ -1,7 +1,8 @@
 // Main application functionality
 class PragmaticCheatsheet {
     constructor() {
-        this.tips = [];
+        this.rawTips = [];
+        this.processedTips = [];
         this.tipsContainer = document.getElementById('tips-grid');
         this.init();
     }
@@ -9,6 +10,7 @@ class PragmaticCheatsheet {
     async init() {
         try {
             await this.loadTips();
+            this.processStories();
             this.renderTips();
         } catch (error) {
             console.error('Failed to initialize app:', error);
@@ -24,10 +26,57 @@ class PragmaticCheatsheet {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            this.tips = await response.json();
+            this.rawTips = await response.json();
         } catch (error) {
             throw new Error('Failed to load tips data');
         }
+    }
+
+    processStories() {
+        // Start with a deep copy of raw tips
+        this.processedTips = JSON.parse(JSON.stringify(this.rawTips));
+        
+        // Clear all stories first - we'll redistribute them
+        this.processedTips.forEach(tip => {
+            tip.stories = [];
+        });
+        
+        // Process each tip's original stories
+        this.rawTips.forEach(tip => {
+            tip.stories.forEach(story => {
+                // Create enhanced story with source information
+                const enhancedStory = {
+                    ...story,
+                    sourceTip: tip.number, // Track where this story originally came from
+                    relatedTips: [...story.relatedTips] // Copy the array
+                };
+                
+                // Add the source tip to relatedTips if not already there
+                if (!enhancedStory.relatedTips.includes(tip.number)) {
+                    enhancedStory.relatedTips.unshift(tip.number);
+                }
+                
+                // Add this story to its home tip (source tip)
+                const homeTip = this.processedTips.find(t => t.number === tip.number);
+                if (homeTip) {
+                    homeTip.stories.push({...enhancedStory, isHomeTip: true});
+                }
+                
+                // Add this story to all related tips (cross-references)
+                enhancedStory.relatedTips.forEach(relatedTipNum => {
+                    if (relatedTipNum !== tip.number) { // Don't duplicate on home tip
+                        const relatedTip = this.processedTips.find(t => t.number === relatedTipNum);
+                        if (relatedTip) {
+                            relatedTip.stories.push({
+                                ...enhancedStory,
+                                isHomeTip: false,
+                                isXref: true
+                            });
+                        }
+                    }
+                });
+            });
+        });
     }
 
     showLoading() {
@@ -49,7 +98,7 @@ class PragmaticCheatsheet {
     renderTips() {
         this.tipsContainer.innerHTML = '';
         
-        this.tips.forEach(tip => {
+        this.processedTips.forEach(tip => {
             const tipCard = this.createTipCard(tip);
             this.tipsContainer.appendChild(tipCard);
         });
@@ -93,13 +142,20 @@ class PragmaticCheatsheet {
 
     createStoryHTML(story, index) {
         return `
-            <div class="tip-card__story">
+            <div class="tip-card__story ${story.isXref ? 'tip-card__story--xref' : ''}">
+                ${story.isXref ? `
+                    <div class="tip-card__story-source">
+                        Story from <a href="#tip-${story.sourceTip}" class="tip-card__source-link" data-tip="${story.sourceTip}">
+                            Tip #${story.sourceTip}
+                        </a>
+                    </div>
+                ` : ''}
                 <div class="tip-card__story-content">
                     ${story.content}
                 </div>
                 ${story.relatedTips && story.relatedTips.length > 0 ? `
                     <div class="tip-card__story-tags">
-                        ${story.relatedTips.map(tipNum => 
+                        Related: ${story.relatedTips.map(tipNum => 
                             `<a href="#tip-${tipNum}" class="tip-card__tag" data-tip="${tipNum}">
                                 Tip #${tipNum}
                             </a>`
@@ -144,7 +200,7 @@ class PragmaticCheatsheet {
 
 // Handle cross-reference clicks
 document.addEventListener('click', (e) => {
-    if (e.target.matches('.tip-card__tag[data-tip]')) {
+    if (e.target.matches('.tip-card__tag[data-tip], .tip-card__source-link[data-tip]')) {
         e.preventDefault();
         const tipNumber = parseInt(e.target.getAttribute('data-tip'));
         app.navigateToTip(tipNumber);
@@ -181,6 +237,30 @@ style.textContent = `
         color: #e74c3c;
         font-size: 1rem;
         text-align: center;
+    }
+
+    .tip-card__story--xref {
+        border-left: 3px solid #007acc;
+        background-color: #f8f9ff;
+    }
+
+    .tip-card__story-source {
+        font-size: 0.8rem;
+        color: #666;
+        margin-bottom: 0.5rem;
+        font-style: italic;
+    }
+
+    .tip-card__source-link {
+        color: #007acc;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s ease;
+    }
+
+    .tip-card__source-link:hover {
+        color: #005999;
+        text-decoration: underline;
     }
 `;
 document.head.appendChild(style);
