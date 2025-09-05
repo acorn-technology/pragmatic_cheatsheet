@@ -194,9 +194,22 @@ class PragmaticCheatsheet {
     }
 
     collapseCard(card, button, storiesContainer) {
-        card.classList.remove('tip-card--expanded');
+        // Set explicit height first for smooth animation
+        const currentHeight = storiesContainer.scrollHeight;
+        storiesContainer.style.maxHeight = currentHeight + 'px';
+        
+        // Update button state immediately
         button.setAttribute('aria-expanded', 'false');
-        storiesContainer.style.maxHeight = '0';
+        
+        // Use a small timeout to ensure the explicit height is applied
+        setTimeout(() => {
+            storiesContainer.style.maxHeight = '0';
+            
+            // Remove the expanded class after animation completes
+            setTimeout(() => {
+                card.classList.remove('tip-card--expanded');
+            }, 400); // Match the CSS transition duration
+        }, 10);
     }
 
     collapseAllCards() {

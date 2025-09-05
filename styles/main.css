@@ -238,11 +238,7 @@ body {
 .tip-card__stories {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
-}
-
-.tip-card--expanded .tip-card__stories {
-    max-height: 500px;
+    transition: max-height 0.4s ease;
 }
 
 .tip-card__story {
