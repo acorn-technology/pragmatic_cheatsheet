@@ -225,13 +225,52 @@ class PragmaticCheatsheet {
     navigateToTip(tipNumber) {
         const targetCard = document.querySelector(`[data-tip-id="${tipNumber}"]`);
         if (targetCard) {
-            targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // First, collapse all currently expanded cards
+            this.collapseAllCards();
+            
+            // Scroll to target card - center it vertically on screen
+            targetCard.scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center',
+                inline: 'nearest'
+            });
+            
+            // Check if target card has stories to expand
+            const hasStories = targetCard.classList.contains('tip-card--has-stories');
+            
+            if (hasStories) {
+                // Quick expansion after minimal scroll delay
+                setTimeout(() => {
+                    const expandBtn = targetCard.querySelector('.tip-card__expand-btn');
+                    if (expandBtn && !targetCard.classList.contains('tip-card--expanded')) {
+                        const storiesContainer = targetCard.querySelector('.tip-card__stories');
+                        this.expandCard(targetCard, expandBtn, storiesContainer);
+                        
+                        // Re-center after expansion to account for new height
+                        setTimeout(() => {
+                            targetCard.scrollIntoView({ 
+                                behavior: 'smooth', 
+                                block: 'center',
+                                inline: 'nearest'
+                            });
+                        }, 100);
+                    }
+                }, 200); // Much faster expansion
+            }
+            
             // Briefly highlight the card
-            targetCard.style.outline = '2px solid #007acc';
+            targetCard.style.outline = '2px solid var(--primary-color)';
             setTimeout(() => {
                 targetCard.style.outline = '';
             }, 2000);
         }
+    }
+
+    // Helper method for expanding a card
+    expandCard(card, button, storiesContainer) {
+        card.classList.add('tip-card--expanded');
+        button.setAttribute('aria-expanded', 'true');
+        storiesContainer.style.maxHeight = storiesContainer.scrollHeight + 'px';
     }
 }
 
