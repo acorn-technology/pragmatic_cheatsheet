@@ -129,7 +129,7 @@ class PragmaticCheatsheet {
                     </div>
                 `}
                 <div class="tip-card__contribute-section">
-                    <a href="#contribute" class="tip-card__contribute-link">Share your experience!</a>
+                    <a href="https://github.com/acorn-technology/pragmatic_cheatsheet#contribute" target="_blank" rel="noopener noreferrer" class="tip-card__contribute-link">Share your experience!</a>
                 </div>
             </div>
             ${hasStories ? `

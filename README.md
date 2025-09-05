@@ -81,6 +81,7 @@ The following features could enhance the user experience:
 
 ### Content Management
 - **Story submission form**: Web interface for contributing stories without GitHub
+- **Automated Pull Requests**: Direct story submission that creates PRs in the correct tip file
 - **Story moderation**: Review system for community-submitted content
 - **Rich text editor**: Support for formatted text, code blocks, and links in stories
 - **Story voting**: Community voting to highlight the most helpful stories
