@@ -171,17 +171,33 @@ class PragmaticCheatsheet {
         const storiesContainer = card.querySelector('.tip-card__stories');
         
         if (isExpanded) {
-            // Collapse
-            card.classList.remove('tip-card--expanded');
-            button.setAttribute('aria-expanded', 'false');
-            storiesContainer.style.maxHeight = '0';
+            // Collapse this card
+            this.collapseCard(card, button, storiesContainer);
         } else {
-            // Expand
+            // First, collapse all other expanded cards
+            this.collapseAllCards();
+            
+            // Then expand this card
             card.classList.add('tip-card--expanded');
             button.setAttribute('aria-expanded', 'true');
             // Set max-height to actual content height for smooth animation
             storiesContainer.style.maxHeight = storiesContainer.scrollHeight + 'px';
         }
+    }
+
+    collapseCard(card, button, storiesContainer) {
+        card.classList.remove('tip-card--expanded');
+        button.setAttribute('aria-expanded', 'false');
+        storiesContainer.style.maxHeight = '0';
+    }
+
+    collapseAllCards() {
+        const expandedCards = document.querySelectorAll('.tip-card--expanded');
+        expandedCards.forEach(card => {
+            const button = card.querySelector('.tip-card__expand-btn');
+            const storiesContainer = card.querySelector('.tip-card__stories');
+            this.collapseCard(card, button, storiesContainer);
+        });
     }
 
     // Navigate to a specific tip (for cross-references)
