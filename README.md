@@ -1,7 +1,8 @@
 # The Pragmatic Cheatsheet
 
-This github pages project is a static website with an interactive overview over the 70 tips from the quick reference guide.   
-Also found [here](https://www.khoury.northeastern.edu/home/lieber/courses/csg110/sp08/Pragmatic%20Quick%20Reference.htm)
+This GitHub Pages project is a static website with an interactive overview of the 70 tips from "The Pragmatic Programmer" (Second Edition).
+
+The tips are extracted from the [Pragmatic Quick Reference Guide](https://www.khoury.northeastern.edu/home/lieber/courses/csg110/sp08/Pragmatic%20Quick%20Reference.htm).
 
 ## The idea
 The website gives the user a overview of the tips in form of cards with title, summary and a expand button to show stories from out developers that relates to that tip.

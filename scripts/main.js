@@ -106,10 +106,11 @@ class PragmaticCheatsheet {
 
     createTipCard(tip) {
         const card = document.createElement('article');
-        card.className = 'tip-card';
-        card.setAttribute('data-tip-id', tip.number);
-
         const hasStories = tip.stories && tip.stories.length > 0;
+        
+        // Apply visual status classes
+        card.className = hasStories ? 'tip-card tip-card--has-stories' : 'tip-card tip-card--no-stories';
+        card.setAttribute('data-tip-id', tip.number);
         
         card.innerHTML = `
             <div class="tip-card__header">
@@ -117,18 +118,25 @@ class PragmaticCheatsheet {
                 <h2 class="tip-card__title">${tip.title}</h2>
                 <p class="tip-card__description">${tip.description}</p>
             </div>
+            <div class="tip-card__actions">
+                ${hasStories ? `
+                    <button class="tip-card__expand-btn" aria-expanded="false" aria-controls="stories-${tip.number}">
+                        ${tip.stories.length > 1 ? `View ${tip.stories.length} Stories` : 'View Story'}
+                    </button>
+                ` : `
+                    <div class="tip-card__no-stories-text">
+                        <p class="tip-card__contribute-text">No stories yet</p>
+                    </div>
+                `}
+                <div class="tip-card__contribute-section">
+                    <a href="#contribute" class="tip-card__contribute-link">Share your experience!</a>
+                </div>
+            </div>
             ${hasStories ? `
-                <button class="tip-card__expand-btn" aria-expanded="false" aria-controls="stories-${tip.number}">
-                    ${tip.stories.length > 1 ? `View ${tip.stories.length} Stories` : 'View Story'}
-                </button>
                 <div class="tip-card__stories" id="stories-${tip.number}">
                     ${tip.stories.map((story, index) => this.createStoryHTML(story, index)).join('')}
                 </div>
-            ` : `
-                <div class="tip-card__no-stories">
-                    <p class="tip-card__contribute-text">No stories yet. <a href="#contribute" class="footer__link">Contribute your experience!</a></p>
-                </div>
-            `}
+            ` : ''}
         `;
 
         // Add event listener for expand button
@@ -232,17 +240,32 @@ document.addEventListener('DOMContentLoaded', () => {
 // Add CSS for no-stories state
 const style = document.createElement('style');
 style.textContent = `
-    .tip-card__no-stories {
-        padding: 1.5rem;
+    .tip-card__no-stories-text {
+        padding: 1rem 1.5rem 0.5rem 1.5rem;
         text-align: center;
-        background-color: #f8f8f8;
-        border-top: 1px solid #e5e5e5;
     }
 
     .tip-card__contribute-text {
-        color: #666;
+        color: var(--text-secondary);
         font-size: 0.9rem;
         margin: 0;
+    }
+
+    .tip-card__contribute-link {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background-color: var(--accent-orange);
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: all 0.2s ease;
+    }
+
+    .tip-card__contribute-link:hover {
+        background-color: var(--primary-color);
+        transform: translateY(-1px);
     }
 
     .error {
@@ -256,27 +279,34 @@ style.textContent = `
     }
 
     .tip-card__story--xref {
-        border-left: 3px solid #007acc;
-        background-color: #f8f9ff;
+        border-left: 3px solid var(--primary-color);
+        background-color: #f0f8f3;
     }
 
     .tip-card__story-source {
         font-size: 0.8rem;
-        color: #666;
+        color: var(--text-secondary);
         margin-bottom: 0.5rem;
         font-style: italic;
     }
 
     .tip-card__source-link {
-        color: #007acc;
+        color: var(--primary-color);
         text-decoration: none;
         font-weight: 500;
         transition: color 0.2s ease;
     }
 
     .tip-card__source-link:hover {
-        color: #005999;
+        color: var(--accent-teal);
         text-decoration: underline;
+    }
+
+    .tip-card__contribute-section {
+        padding: 1rem 1.5rem 1.5rem 1.5rem;
+        text-align: center;
+        background-color: var(--background-accent);
+        border-top: 1px solid var(--border-light);
     }
 `;
 document.head.appendChild(style);
