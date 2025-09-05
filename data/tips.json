@@ -1,0 +1,445 @@
+[
+    {
+        "number": 1,
+        "title": "Care About Your Craft",
+        "description": "Why spend your life developing software unless you care about doing it well?",
+        "stories": []
+    },
+    {
+        "number": 2,
+        "title": "Think! About Your Work",
+        "description": "Turn off the autopilot and take control. Constantly critique and appraise your work.",
+        "stories": []
+    },
+    {
+        "number": 3,
+        "title": "Provide Options, Don't Make Lame Excuses",
+        "description": "Instead of excuses, provide options. Don't say it can't be done; explain what can be done.",
+        "stories": []
+    },
+    {
+        "number": 4,
+        "title": "Don't Live with Broken Windows",
+        "description": "Fix bad designs, wrong decisions, and poor code when you see them.",
+        "stories": [
+            {
+                "content": "I once worked on a project where we had a small bug in the user authentication system - sometimes users would get logged out randomly. The team said \"it's not critical, we'll fix it later.\" But that \"later\" never came. Soon, other small bugs started piling up. It wasn't until a new team lead joined and insisted we fix the authentication bug first that things turned around. Once we fixed that \"broken window,\" the team's attitude shifted and we started taking pride in our code quality again.",
+                "relatedTips": []
+            },
+            {
+                "content": "At my startup, we had a legacy codebase with no tests and inconsistent coding standards. Instead of working around these issues like everyone else, I started small - I wrote tests for the module I was working on and refactored just that piece. Other developers noticed and started doing the same. Within six months, we had transformed our entire development culture simply by not accepting the \"broken windows\" anymore.",
+                "relatedTips": [23, 24]
+            }
+        ]
+    },
+    {
+        "number": 5,
+        "title": "Be a Catalyst for Change",
+        "description": "You can't force change on people. Instead, show them how the future might be and help them participate in creating it.",
+        "stories": []
+    },
+    {
+        "number": 6,
+        "title": "Remember the Big Picture",
+        "description": "Don't get so engrossed in the details that you forget to check what's happening around you.",
+        "stories": []
+    },
+    {
+        "number": 7,
+        "title": "Make Quality a Requirements Issue",
+        "description": "Involve your users in determining the project's real quality requirements.",
+        "stories": []
+    },
+    {
+        "number": 8,
+        "title": "Invest Regularly in Your Knowledge Portfolio",
+        "description": "Make learning a habit.",
+        "stories": []
+    },
+    {
+        "number": 9,
+        "title": "Critically Analyze What You Read and Hear",
+        "description": "Don't be swayed by vendors, media hype, or dogma. Analyze information in terms of you and your project.",
+        "stories": []
+    },
+    {
+        "number": 10,
+        "title": "It's Both What You Say and the Way You Say It",
+        "description": "There's no point in having great ideas if you don't communicate them effectively.",
+        "stories": []
+    },
+    {
+        "number": 11,
+        "title": "DRY—Don't Repeat Yourself",
+        "description": "Every piece of knowledge must have a single, unambiguous, authoritative representation within a system.",
+        "stories": [
+            {
+                "content": "I was maintaining a React application where the same user validation logic was copied across 5 different components. When requirements changed to add email format validation, I had to hunt down and update each copy. I missed one, and it caused a production bug. The fix was simple - extract the validation logic into a custom hook. Now there's one source of truth for user validation.",
+                "relatedTips": []
+            },
+            {
+                "content": "During a code review, I noticed a junior developer had copy-pasted a complex database query function across multiple service files. I suggested we create a generic query builder function with parameters for the different use cases. This eliminated the duplication and made the code more testable and easier to understand.",
+                "relatedTips": [12, 29]
+            }
+        ]
+    },
+    {
+        "number": 12,
+        "title": "Make It Easy to Reuse",
+        "description": "If it's easy to reuse, people will. Create an environment that supports reuse.",
+        "stories": []
+    },
+    {
+        "number": 13,
+        "title": "Eliminate Effects Between Unrelated Things",
+        "description": "Design components that are self-contained, independent, and have a single, well-defined purpose.",
+        "stories": []
+    },
+    {
+        "number": 14,
+        "title": "There Are No Final Decisions",
+        "description": "No decision is cast in stone. Instead, consider each as being written in the sand at the beach, and plan for change.",
+        "stories": []
+    },
+    {
+        "number": 15,
+        "title": "Use Tracer Bullets to Find the Target",
+        "description": "Tracer bullets let you home in on your target by trying things and seeing how close they land.",
+        "stories": []
+    },
+    {
+        "number": 16,
+        "title": "Prototype to Learn",
+        "description": "Prototyping is a learning experience. Its value lies not in the code you produce, but in the lessons you learn.",
+        "stories": []
+    },
+    {
+        "number": 17,
+        "title": "Program Close to the Problem Domain",
+        "description": "Design and code in your user's language.",
+        "stories": []
+    },
+    {
+        "number": 18,
+        "title": "Estimate to Avoid Surprises",
+        "description": "Estimate before you start. You'll spot potential problems up front.",
+        "stories": []
+    },
+    {
+        "number": 19,
+        "title": "Iterate the Schedule with the Code",
+        "description": "Use experience you gain as you implement to refine the project time scales.",
+        "stories": []
+    },
+    {
+        "number": 20,
+        "title": "Keep Knowledge in Plain Text",
+        "description": "Plain text won't become obsolete. It helps leverage your work and simplifies debugging and testing.",
+        "stories": []
+    },
+    {
+        "number": 21,
+        "title": "Use the Power of Command Shells",
+        "description": "Use the shell when graphical user interfaces don't cut it.",
+        "stories": []
+    },
+    {
+        "number": 22,
+        "title": "Use a Single Editor Well",
+        "description": "The editor should be an extension of your hand; make sure your editor is configurable, extensible, and programmable.",
+        "stories": []
+    },
+    {
+        "number": 23,
+        "title": "Always Use Source Code Control",
+        "description": "Source code control is a time machine for your work—you can go back.",
+        "stories": []
+    },
+    {
+        "number": 24,
+        "title": "Fix the Problem, Not the Blame",
+        "description": "It doesn't really matter whether the bug is your fault or someone else's—it is still your problem, and it still needs to be fixed.",
+        "stories": []
+    },
+    {
+        "number": 25,
+        "title": "Don't Panic When Debugging",
+        "description": "Take a deep breath and THINK! about what could be causing the symptoms that you believe indicate a bug.",
+        "stories": [
+            {
+                "content": "I once spent 3 hours frantically debugging what seemed like a database connection issue. The application would randomly fail to retrieve user data, but only in production. I was diving deep into connection pooling configurations and database logs. Finally, I stepped back and took a deep breath. When I calmly traced through the code path, I discovered it was actually a caching issue. The lesson: panic makes you tunnel vision on symptoms instead of root causes.",
+                "relatedTips": []
+            }
+        ]
+    },
+    {
+        "number": 26,
+        "title": "Select Isn't Broken",
+        "description": "It is rare to find a bug in the OS or the compiler, or even a third-party product or library. The bug is most likely in the application.",
+        "stories": []
+    },
+    {
+        "number": 27,
+        "title": "Don't Assume It—Prove It",
+        "description": "Prove your assumptions in the actual environment—with real data and boundary conditions.",
+        "stories": []
+    },
+    {
+        "number": 28,
+        "title": "Learn a Text Manipulation Language",
+        "description": "You spend a large part of each day working with text. Why not have the computer do some of it for you?",
+        "stories": []
+    },
+    {
+        "number": 29,
+        "title": "Write Code That Writes Code",
+        "description": "Code generators increase your productivity and help protect you from duplication.",
+        "stories": []
+    },
+    {
+        "number": 30,
+        "title": "You Can't Write Perfect Software",
+        "description": "Software can't be perfect. Protect your code and users from the inevitable errors.",
+        "stories": []
+    },
+    {
+        "number": 31,
+        "title": "Design with Contracts",
+        "description": "Use contracts to document and verify that code does no more and no less than it claims to do.",
+        "stories": []
+    },
+    {
+        "number": 32,
+        "title": "Crash Early",
+        "description": "A dead program normally does a lot less damage than a crippled one.",
+        "stories": []
+    },
+    {
+        "number": 33,
+        "title": "Use Assertions to Prevent the Impossible",
+        "description": "Assertions validate your assumptions. Use them to protect your code from an uncertain world.",
+        "stories": []
+    },
+    {
+        "number": 34,
+        "title": "Use Exceptions for Exceptional Problems",
+        "description": "Exceptions can suffer from all the readability and maintainability problems of classic spaghetti code. Reserve exceptions for exceptional things.",
+        "stories": []
+    },
+    {
+        "number": 35,
+        "title": "Finish What You Start",
+        "description": "Where possible, the routine or object that allocates a resource should be responsible for deallocating it.",
+        "stories": []
+    },
+    {
+        "number": 36,
+        "title": "Minimize Coupling Between Modules",
+        "description": "Avoid coupling by writing shy code and applying the Law of Demeter.",
+        "stories": []
+    },
+    {
+        "number": 37,
+        "title": "Configure, Don't Integrate",
+        "description": "Implement technology choices as configuration options, not through integration or engineering.",
+        "stories": []
+    },
+    {
+        "number": 38,
+        "title": "Put Abstractions in Code, Details in Metadata",
+        "description": "Program for the general case, and put the specifics outside the compiled code base.",
+        "stories": []
+    },
+    {
+        "number": 39,
+        "title": "Analyze Workflow to Improve Concurrency",
+        "description": "Exploit concurrency in your user's workflow.",
+        "stories": []
+    },
+    {
+        "number": 40,
+        "title": "Design Using Services",
+        "description": "Design in terms of services—independent, concurrent objects behind well-defined, consistent interfaces.",
+        "stories": []
+    },
+    {
+        "number": 41,
+        "title": "Always Design for Concurrency",
+        "description": "Allow for concurrency, and you'll design cleaner interfaces with fewer assumptions.",
+        "stories": []
+    },
+    {
+        "number": 42,
+        "title": "Separate Views from Models",
+        "description": "Gain flexibility at low cost by designing your application in terms of models and views.",
+        "stories": []
+    },
+    {
+        "number": 43,
+        "title": "Use Blackboards to Coordinate Workflow",
+        "description": "Use blackboards to coordinate disparate facts and agents, while maintaining independence and isolation among participants.",
+        "stories": []
+    },
+    {
+        "number": 44,
+        "title": "Don't Program by Coincidence",
+        "description": "Rely only on reliable things. Beware of accidental complexity, and don't confuse a happy coincidence with a purposeful plan.",
+        "stories": []
+    },
+    {
+        "number": 45,
+        "title": "Estimate the Order of Your Algorithms",
+        "description": "Get a feel for how long things are likely to take before you write code.",
+        "stories": []
+    },
+    {
+        "number": 46,
+        "title": "Test Your Estimates",
+        "description": "Mathematical analysis of algorithms doesn't tell you everything. Try timing your code in its target environment.",
+        "stories": []
+    },
+    {
+        "number": 47,
+        "title": "Refactor Early, Refactor Often",
+        "description": "Just as you might weed and rearrange a garden, rewrite, rework, and re-architect code when it needs it. Fix the root of the problem.",
+        "stories": []
+    },
+    {
+        "number": 48,
+        "title": "Design to Test",
+        "description": "Start thinking about testing before you write a line of code.",
+        "stories": []
+    },
+    {
+        "number": 49,
+        "title": "Test Your Software, or Your Users Will",
+        "description": "Test ruthlessly. Don't make your users find bugs for you.",
+        "stories": []
+    },
+    {
+        "number": 50,
+        "title": "Don't Use Wizard Code You Don't Understand",
+        "description": "Wizards can generate reams of code. Make sure you understand all of it before you incorporate it into your project.",
+        "stories": []
+    },
+    {
+        "number": 51,
+        "title": "Don't Gather Requirements—Dig for Them",
+        "description": "Requirements rarely lie on the surface. They're buried deep beneath layers of assumptions, misconceptions, and politics.",
+        "stories": []
+    },
+    {
+        "number": 52,
+        "title": "Work with a User to Think Like a User",
+        "description": "It's the best way to gain insight into how the system will really be used.",
+        "stories": []
+    },
+    {
+        "number": 53,
+        "title": "Abstractions Live Longer than Details",
+        "description": "Invest in the abstraction, not the implementation. Abstractions can survive the barrage of changes from different implementations and new technologies.",
+        "stories": []
+    },
+    {
+        "number": 54,
+        "title": "Use a Project Glossary",
+        "description": "Create and maintain a single source of all the specific terms and vocabulary for a project.",
+        "stories": []
+    },
+    {
+        "number": 55,
+        "title": "Don't Think Outside the Box—Find the Box",
+        "description": "When faced with an impossible problem, identify the real constraints. Ask yourself: 'Does it have to be done this way? Does it have to be done at all?'",
+        "stories": []
+    },
+    {
+        "number": 56,
+        "title": "Start When You're Ready",
+        "description": "You've been building experience all your life. Don't ignore niggling doubts.",
+        "stories": []
+    },
+    {
+        "number": 57,
+        "title": "Some Things Are Better Done than Described",
+        "description": "Don't fall into the specification spiral—at some point you need to start coding.",
+        "stories": []
+    },
+    {
+        "number": 58,
+        "title": "Don't Be a Slave to Formal Methods",
+        "description": "Don't blindly adopt any technique without putting it into the context of your development practices and capabilities.",
+        "stories": []
+    },
+    {
+        "number": 59,
+        "title": "Costly Tools Don't Produce Better Designs",
+        "description": "Beware of vendor hype, industry dogma, and the aura of the price tag. Judge tools on their merits.",
+        "stories": []
+    },
+    {
+        "number": 60,
+        "title": "Organize Teams Around Functionality",
+        "description": "Don't separate designers from coders, testers from data modelers. Build teams the way you build code.",
+        "stories": []
+    },
+    {
+        "number": 61,
+        "title": "Don't Use Manual Procedures",
+        "description": "A shell script or batch file will execute the same instructions, in the same order, time after time.",
+        "stories": []
+    },
+    {
+        "number": 62,
+        "title": "Test Early. Test Often. Test Automatically",
+        "description": "Tests that run with every build are much more effective than test plans that sit on a shelf.",
+        "stories": []
+    },
+    {
+        "number": 63,
+        "title": "Coding Ain't Done 'Til All the Tests Run",
+        "description": "'Nuff said.",
+        "stories": []
+    },
+    {
+        "number": 64,
+        "title": "Use Saboteurs to Test Your Testing",
+        "description": "Introduce bugs on purpose in a separate copy of the source to verify that testing will catch them.",
+        "stories": []
+    },
+    {
+        "number": 65,
+        "title": "Test State Coverage, Not Code Coverage",
+        "description": "Identify and test significant program states. Just testing lines of code isn't enough.",
+        "stories": []
+    },
+    {
+        "number": 66,
+        "title": "Find Bugs Once",
+        "description": "Once a human tester finds a bug, it should be the last time a human tester finds that bug. Automatic tests should check for it from then on.",
+        "stories": []
+    },
+    {
+        "number": 67,
+        "title": "English is Just a Programming Language",
+        "description": "Write documents as you would write code: honor the DRY principle, use metadata, MVC, automatic generation, and so on.",
+        "stories": []
+    },
+    {
+        "number": 68,
+        "title": "Build Documentation In, Don't Bolt It On",
+        "description": "Documentation created separately from code is less likely to be correct and up to date.",
+        "stories": []
+    },
+    {
+        "number": 69,
+        "title": "Gently Exceed Your Users' Expectations",
+        "description": "Come to understand your users' expectations, then deliver just that little bit more.",
+        "stories": []
+    },
+    {
+        "number": 70,
+        "title": "Sign Your Work",
+        "description": "Craftsmen of an earlier age were proud to sign their work. You should be, too.",
+        "stories": []
+    }
+]
