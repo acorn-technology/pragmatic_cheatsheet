@@ -222,23 +222,40 @@ class PragmaticCheatsheet {
     }
 
     // Navigate to a specific tip (for cross-references)
-    navigateToTip(tipNumber) {
+    navigateToTip(tipNumber, sourceTipNumber = -1) {
         const targetCard = document.querySelector(`[data-tip-id="${tipNumber}"]`);
         if (targetCard) {
-            // First, collapse all currently expanded cards
-            this.collapseAllCards();
+            // Check if target card is already expanded
+            const targetAlreadyExpanded = targetCard.classList.contains('tip-card--expanded');
             
-            // Scroll to target card - center it vertically on screen
-            targetCard.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'center',
-                inline: 'nearest'
-            });
+            // Only collapse other cards if we're not navigating within the same expanded card
+            if (!targetAlreadyExpanded) {
+                this.collapseAllCards();
+            }
             
             // Check if target card has stories to expand
             const hasStories = targetCard.classList.contains('tip-card--has-stories');
             
-            if (hasStories) {
+            if (targetAlreadyExpanded && hasStories) {
+                // Card is already expanded, just scroll and highlight the story
+                targetCard.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center',
+                    inline: 'nearest'
+                });
+                
+                setTimeout(() => {
+                    this.highlightAndCenterStory(targetCard, sourceTipNumber);
+                }, 300);
+                
+            } else if (hasStories) {
+                // Card needs to be expanded first
+                targetCard.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center',
+                    inline: 'nearest'
+                });
+                
                 // Quick expansion after minimal scroll delay
                 setTimeout(() => {
                     const expandBtn = targetCard.querySelector('.tip-card__expand-btn');
@@ -246,23 +263,134 @@ class PragmaticCheatsheet {
                         const storiesContainer = targetCard.querySelector('.tip-card__stories');
                         this.expandCard(targetCard, expandBtn, storiesContainer);
                         
-                        // Re-center after expansion to account for new height
+                        // Re-center after expansion and highlight story
                         setTimeout(() => {
-                            targetCard.scrollIntoView({ 
-                                behavior: 'smooth', 
-                                block: 'center',
-                                inline: 'nearest'
-                            });
-                        }, 100);
+                            this.highlightAndCenterStory(targetCard, sourceTipNumber);
+                        }, 300);
                     }
-                }, 200); // Much faster expansion
+                }, 200);
+                
+            } else {
+                // No stories, just scroll to card
+                targetCard.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'center',
+                    inline: 'nearest'
+                });
             }
+        }
+    }
+
+    // Highlight and center the story that corresponds to the clicked tag
+    highlightAndCenterStory(targetCard, sourceTipNumber) {
+        console.log('Attempting to highlight and center story from source tip:', sourceTipNumber);
+        
+        if (sourceTipNumber >= 0) {
+            const tryHighlightAndCenter = () => {
+                const targetStories = targetCard.querySelectorAll('.tip-card__story');
+                
+                // Find story that came from the source tip
+                let targetStory = null;
+                targetStories.forEach(story => {
+                    const sourceLink = story.querySelector(`[data-tip="${sourceTipNumber}"]`);
+                    if (sourceLink) {
+                        targetStory = story;
+                    }
+                });
+                
+                console.log('Found stories:', targetStories.length, 'Target story:', targetStory);
+                
+                if (targetStory) {
+                    // First center the story on screen
+                    targetStory.scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'center',
+                        inline: 'nearest'
+                    });
+                    
+                    // Then highlight it after scroll completes
+                    setTimeout(() => {
+                        targetStory.style.outline = '3px solid var(--primary-color)';
+                        targetStory.style.backgroundColor = 'rgba(232, 22, 138, 0.2)';
+                        targetStory.style.transform = 'scale(1.02)';
+                        targetStory.style.transition = 'all 0.3s ease';
+                        targetStory.style.boxShadow = '0 4px 20px rgba(232, 22, 138, 0.3)';
+                        
+                        setTimeout(() => {
+                            targetStory.style.outline = '';
+                            targetStory.style.backgroundColor = '';
+                            targetStory.style.transform = '';
+                            targetStory.style.boxShadow = '';
+                        }, 2000);
+                    }, 300); // Wait for scroll to complete
+                    
+                    return true;
+                }
+                return false;
+            };
             
-            // Briefly highlight the card
-            targetCard.style.outline = '2px solid var(--primary-color)';
-            setTimeout(() => {
-                targetCard.style.outline = '';
-            }, 2000);
+            // Try with retry logic
+            if (!tryHighlightAndCenter()) {
+                setTimeout(() => {
+                    if (!tryHighlightAndCenter()) {
+                        setTimeout(tryHighlightAndCenter, 200);
+                    }
+                }, 400);
+            }
+        }
+    }
+
+    // Highlight the story that corresponds to the clicked tag (old method for compatibility)
+    highlightSourceStory(targetCard, sourceTipNumber) {
+        console.log('Attempting to highlight story from source tip:', sourceTipNumber); // Debug
+        
+        if (sourceTipNumber >= 0) {
+            // Wait a bit longer and try multiple times if needed
+            const tryHighlight = () => {
+                const targetStories = targetCard.querySelectorAll('.tip-card__story');
+                
+                // Find story that came from the source tip
+                let targetStory = null;
+                targetStories.forEach(story => {
+                    // Check if this story has a cross-reference back to the source tip
+                    const sourceLink = story.querySelector(`[data-tip="${sourceTipNumber}"]`);
+                    if (sourceLink) {
+                        targetStory = story;
+                    }
+                });
+                
+                console.log('Found stories:', targetStories.length, 'Target story:', targetStory); // Debug
+                
+                if (targetStory) {
+                    // Much more visible highlight
+                    targetStory.style.outline = '3px solid var(--primary-color)';
+                    targetStory.style.backgroundColor = 'rgba(232, 22, 138, 0.2)'; // Stronger pink background
+                    targetStory.style.transform = 'scale(1.02)'; // Slight scale effect
+                    targetStory.style.transition = 'all 0.3s ease'; // Smooth transition
+                    targetStory.style.boxShadow = '0 4px 20px rgba(232, 22, 138, 0.3)'; // Pink glow
+                    
+                    setTimeout(() => {
+                        targetStory.style.outline = '';
+                        targetStory.style.backgroundColor = '';
+                        targetStory.style.transform = '';
+                        targetStory.style.boxShadow = '';
+                    }, 2000);
+                    
+                    return true; // Success
+                }
+                return false; // Failed
+            };
+            
+            // Try immediately
+            if (!tryHighlight()) {
+                // If failed, try again after animation completes
+                setTimeout(() => {
+                    if (!tryHighlight()) {
+                        // Final attempt after even longer delay
+                        setTimeout(tryHighlight, 200);
+                    }
+                }, 400);
+            }
         }
     }
 
@@ -279,7 +407,14 @@ document.addEventListener('click', (e) => {
     if (e.target.matches('.tip-card__tag[data-tip], .tip-card__source-link[data-tip]')) {
         e.preventDefault();
         const tipNumber = parseInt(e.target.getAttribute('data-tip'));
-        app.navigateToTip(tipNumber);
+        
+        // Find the source tip number from the current card
+        const currentCard = e.target.closest('.tip-card');
+        const sourceTipNumber = parseInt(currentCard.getAttribute('data-tip-id'));
+        
+        console.log('Navigating from tip', sourceTipNumber, 'to tip', tipNumber); // Debug
+        
+        app.navigateToTip(tipNumber, sourceTipNumber);
     }
 });
 
