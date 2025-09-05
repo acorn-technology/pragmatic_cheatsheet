@@ -49,7 +49,9 @@ html, css, javascript.
 Just keep it simple with as little code and dependencies as possible, but try to keep it modern and convenient.
 
 ## Release
-Running the GitHub Action will automatically deploy the static website to GitHub Pages when you push to the `main` branch.
+> **Note:** GitHub Pages deployment workflow needs to be configured by repository administrators with appropriate permissions.
+
+The static website can be deployed to GitHub Pages. A GitHub Actions workflow file is included in the repository for automatic deployment when pushing to the `main` branch.
 
 ## Local Development
 To run the website locally:
