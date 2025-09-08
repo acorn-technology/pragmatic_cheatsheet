@@ -49,10 +49,39 @@ Whatever is good for a simple, easy to maintain and modern static webpages
 html, css, javascript.
 Just keep it simple with as little code and dependencies as possible, but try to keep it modern and convenient.
 
-## Release
-> **Note:** GitHub Pages deployment workflow needs to be configured by repository administrators with appropriate permissions.
+## Deployment
 
-The static website can be deployed to GitHub Pages. A GitHub Actions workflow file is included in the repository for automatic deployment when pushing to the `main` branch.
+### Manual Deployment to GitHub Pages
+The repository includes a GitHub Actions workflow for manual deployment to the `gh-pages` branch.
+
+#### Prerequisites
+- Repository administrator permissions
+- GitHub Actions enabled for the repository
+- GitHub Pages configured to deploy from `gh-pages` branch
+
+#### How to Deploy
+1. **Navigate to the Actions tab** in your GitHub repository
+2. **Select "Deploy to GitHub Pages"** workflow
+3. **Click "Run workflow"** button
+4. **Choose environment** (production/staging) - optional
+5. **Click "Run workflow"** to start deployment
+
+The workflow will automatically:
+- Build the static site (cleanup development files)
+- Create/update the `gh-pages` branch
+- Deploy to GitHub Pages
+
+#### Repository Settings
+Ensure GitHub Pages is configured in repository settings:
+- Go to **Settings → Pages**
+- Set **Source** to "Deploy from a branch"
+- Select **Branch**: `gh-pages` and **Folder**: `/ (root)`
+
+#### Troubleshooting
+If you encounter workflow permission errors:
+- Ensure your GitHub token has `workflow` scope permissions
+- Repository administrators may need to enable GitHub Actions
+- Check that GitHub Pages is enabled in repository settings
 
 ## Local Development
 To run the website locally:
